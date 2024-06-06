@@ -63,10 +63,23 @@
 <h1>List of uploaded files</h1>
 <ul>
     {% for file in files %}
+        {% comment %} <li>
+            <a href="{{ file.file.url }}">{{ file.file.name }}</a>
+            <span>(Uploaded {{ file.uploaded_at|date:'F j, Y' }})</span> 
+            <form action="{% url 'delete_file' file.pk %}" method="post">
+                {% csrf_token %}
+                <button type="submit">删除</button>
+            </form>
+            
+        </li> {% endcomment %}
+
         <li>
             <a href="{{ file.file.url }}">{{ file.file.name }}</a>
-            {% comment %} <span>(Uploaded by {{ file.uploader.username }} on {{ file.uploaded_at|date:'F j, Y' }})</span> {% endcomment %}
-            <span>(Uploaded {{ file.uploaded_at|date:'F j, Y' }})</span> 
+            <span>(Uploaded {{ file.uploaded_at|date:'F j, Y' }})</span>
+            <form style="display: inline-block;" action="{% url 'delete_file' file.pk %}" method="post">
+                {% csrf_token %}
+                <button type="submit">删除</button>
+            </form>
         </li>
     {% empty %}
         <li>No files have been uploaded yet.</li>
@@ -83,6 +96,9 @@
     </script>
 {% endif %}
 
-    
+
+
+
 </body>
 </html>
+

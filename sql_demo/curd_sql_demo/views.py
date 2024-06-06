@@ -69,7 +69,22 @@ def person_delete(request, pk):
     return render(request, 'curd_sql_demo/person_confirm_delete.html', {'person': person})
 
 
+from django.shortcuts import get_object_or_404, redirect, render
 
+from .models import UploadedFile
+
+def delete_file(request, pk):
+    uploaded_file = get_object_or_404(UploadedFile, id=pk)
+    if request.method == 'POST':
+        # 删除文件系统中的文件
+        uploaded_file.file.delete(save=False)
+        # 删除数据库中的记录
+        uploaded_file.delete()
+        messages.success(request, "文件记录删除成功！")
+        return redirect('person_list')  # 假设这是显示所有上传文件的视图的名称
+    else:
+        print("not post")
+    return redirect('person_list')
 
 
 
