@@ -1,0 +1,11 @@
+1.启动redis
+redis-server.exe redis.windows.conf
+2.启动node v14
+npm run dev
+3.启动服务器
+python manage.py runserver 6060
+
+最后：进入网页 http://127.0.0.1:8000/
+
+
+开发网页时命名的文件不要用下划线"_"，应该用连字符"-"

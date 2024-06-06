@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% if person %}编辑人员{% else %}新增人员{% endif %}</title>
+</head>
+<body>
+    <h2>{% if person %}编辑{% else %}新增{% endif %}人员</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">{% if person %}保存更改{% else %}创建{% endif %}</button>
+    </form>
+</body>
+</html>
